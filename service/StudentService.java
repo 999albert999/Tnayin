@@ -4,6 +4,7 @@ import com.sun.tools.javac.Main;
 import model.Student;
 
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 public class StudentService {
     public static Student[] createStudents(String[] data, String url) throws Exception {
@@ -42,8 +43,11 @@ public class StudentService {
         return sorted;
     }
     public static void newFile(Student[] students) throws Exception{
+        StringJoiner sj = new StringJoiner("");
         for (Student x:students) {
-            String url = x.getName() + ".txt";
+            sj.add(x.getName());
+            sj.add(".txt");
+            String url = sj.toString();
             FileService.write(url,x.toString());
         }
     }
